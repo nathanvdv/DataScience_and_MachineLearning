@@ -47,10 +47,14 @@ userID = None
 # Returns the 'deviceId' that can be found on the json file.
 def GetDeviceIDFromUserID(userID):
   try:
-    req = "TODO"
-    deviceIDstrResponse = "TODO"
-    JSONdeviceIDResponse = "TODO"
+    url_user = 'https://europe-west9-simf-403016.cloudfunctions.net/SIMF_UserIDToDeviceID'
+    header_user = {"userID": userID}
+    req = urequests.get(url_user, headers = header_user)
+    deviceIDstrResponse = req.text
+    JSONdeviceIDResponse = json.loads(deviceIDstrResponse)
     
+    
+
     gc.collect()
     req.close()
     
@@ -71,9 +75,13 @@ def GetDeviceIDFromUserID(userID):
 # Returns the 'ConnectedIP' that can be found on the json file.
 def getLogsFromDeviceID(deviceID):
   try:
-    req = "TODO"
-    deviceId = "TODO"
-    JSONdeviceIDResponse = "TODO"
+    url_device = 'https://europe-west9-simf-403016.cloudfunctions.net/SIMF'
+    header_device = {"deviceID": deviceID}
+    req = urequests.get(url_device, headers = header_device)
+    deviceID = req.text
+    JSONdeviceIDResponse = json.loads(deviceID)
+    
+    
 
     gc.collect()
     req.close()
